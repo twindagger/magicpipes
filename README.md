@@ -24,7 +24,7 @@ pipeline.send({ some: 'context' })
 
 ### Pipeline factory
 
-`let pipeline = pipes(firmware1, firmware2 /*, ... */)`
+`let pipeline = pipes(filter1, filter2 /*, ... */)`
 The main export of the pipeline api is the pipeline factory function. It takes as its arguments 0 or more filter functions to be called in the pipe.
 
 ### Use your own promise implementation

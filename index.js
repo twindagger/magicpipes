@@ -1,7 +1,7 @@
 const filters = require('./lib');
 const { usePromiseImplementation, getPromiseImplementation } = require('./lib/util');
 
-const pipeFactory = (...middleware) => {
+const pipeFactory = (...pipeFilters) => {
   let pimpl = getPromiseImplementation();
 
   const pwrap = (fn, ...args) => {
@@ -20,15 +20,15 @@ const pipeFactory = (...middleware) => {
   return {
     send(context) {
       const step = idx => ctx =>
-        idx < middleware.length
-          ? pwrap(middleware[idx], ctx, step(idx + 1))
+        idx < pipeFilters.length
+          ? pwrap(pipeFilters[idx], ctx, step(idx + 1))
           : pimpl.resolve(ctx);
 
       return step(0)(context);
     },
     inspect() {
       return {
-        pipeline: middleware.map(m => typeof(m.inspect) === 'function' ? m.inspect() : 'Unknown Filter')
+        pipeline: pipeFilters.map(m => typeof(m.inspect) === 'function' ? m.inspect() : 'Unknown Filter')
       };
     }
   };
