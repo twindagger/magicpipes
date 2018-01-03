@@ -11,7 +11,7 @@ const pipeFactory = (...middleware) => {
     } catch(ex) {
       return pimpl.reject(ex);
     }
-    if (typeof(res.then) === 'function') {
+    if (res && typeof(res.then) === 'function') {
       return res;
     }
     return pimpl.resolve(res);
