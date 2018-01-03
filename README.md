@@ -90,3 +90,8 @@ pipes.usePromiseImplementation(require('bluebird'));
 * `interval` - time in seconds to wait before executing a retry. Defaults to 1. Ignored if `before` is provided.
 * `before` - function called before each retry occurs. Use to implement an exponential retry, for example. _Must_ return a promise to be fulfilled before retry occurs.
 * `errorFilter` - function to filter errors (for example of a specific type). Must return a truthy value when a pipeline should be retried. Defaults to a function that always returns true.
+
+
+## Credits
+
+* Heavily inspired by https://github.com/phatboyg/GreenPipes
