@@ -4,7 +4,6 @@ jobs:
     working_directory: ~/magicpipes
     docker:
       - image: node:8
-      - image: rabbitmq:3
     steps:
       - checkout
       - run:

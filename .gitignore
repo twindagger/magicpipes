@@ -252,3 +252,4 @@ wallaby.json
 .DS_Store
 docs
 junit.xml
+test-results.xml
