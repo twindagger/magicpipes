@@ -48,8 +48,5 @@
         "statements": -10
       }
     }
-  },
-  "jest-junit": {
-    "output": "./test-results.xml"
   }
 }
