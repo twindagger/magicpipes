@@ -15,7 +15,7 @@ jobs:
       - store_test_results:
           path: ~/magicpipes
       - store_artifacts:
-          path: junit.xml
+          path: test-results.xml
   publish:
     docker:
       - image: node:8
