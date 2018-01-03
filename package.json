@@ -48,5 +48,11 @@
         "statements": -10
       }
     }
+  },
+  "jest-junit": {
+    "suiteName": "magicpipes jest",
+    "classNameTemplate": "{filename}",
+    "titleTemplate": "{classname} > {title}",
+    "ancestorSeporator": " > "
   }
 }
