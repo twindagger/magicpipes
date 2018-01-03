@@ -105,7 +105,22 @@ describe('circuitBreaker', () => {
       // opens breaker
       testFilter.mockImplementationOnce(failFilter(errorMessage));
       await pipe.send(context).catch(() => 0);
+      expect(pipe.inspect().pipeline[0].state.state).toEqual('opened');
       await expect(pipe.send(context)).rejects.toThrow(errorMessage);
+    });
+
+    it('breaker should not re-close until activeThreshold is reached again', async () => {
+      await pipe.send(context);
+      await pipe.send(context);
+      // opens breaker
+      testFilter.mockImplementationOnce(failFilter(errorMessage));
+      await pipe.send(context).catch(() => 0);
+      expect(pipe.inspect().pipeline[0].state.state).toEqual('opened');
+      clock.tick(2000);
+      await pipe.send(context);
+      expect(pipe.inspect().pipeline[0].state.state).toEqual('halfOpened');
+      await pipe.send(context);
+      expect(pipe.inspect().pipeline[0].state.state).toEqual('closed');
     });
   });
 
@@ -136,6 +151,16 @@ describe('circuitBreaker', () => {
       await expect(pipe.send(context)).rejects.toThrow(errorMessage);
       await expect(pipe.send(context)).rejects.toThrow(errorMessage);
       expect(pipe.inspect().pipeline[0].state.state).toEqual('opened');
+    });
+  });
+
+  describe('given no options', () => {
+    beforeEach(() => {
+      pipe = pipes(pipes.circuitBreaker(), testFilter);
+    });
+
+    it('should default as expected', async () => {
+      expect(pipe.inspect().pipeline[0]).toEqual({ type: 'circuitBreaker', trackingPeriod: 60, resetTimeout: 300, activeThreshold: 0, tripThreshold: 0, state: { state: 'closed', attempts: 0, failures: 0 } });
     });
   });
 });

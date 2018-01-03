@@ -3,6 +3,7 @@ const delay = (timeout) => new Promise((res) => setTimeout(res, timeout));
 
 describe('concurrency', () => {
   let testFilter, context, pipe, maxConcurrent;
+  const limit = 2;
 
   beforeEach(() => {
     maxConcurrent = 0;
@@ -15,7 +16,7 @@ describe('concurrency', () => {
     });
     context = { a: 1 };
     pipe = pipes(pipes.concurrency({
-      limit: 2
+      limit
     }), testFilter);
   });
 
@@ -28,5 +29,9 @@ describe('concurrency', () => {
     let all = Promise.all([pipe.send(context), pipe.send(context), pipe.send(context), pipe.send(context)]);
     await all;
     expect(maxConcurrent).toBeLessThanOrEqual(2);
+  });
+
+  it('should support inspect', async () => {
+    expect(pipe.inspect().pipeline[0]).toEqual({ type: 'concurrency', limit: 2, executing: 0 });
   });
 });
