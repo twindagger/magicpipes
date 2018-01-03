@@ -1,5 +1,7 @@
 # magicpipes
 
+[![CircleCI](https://circleci.com/gh/twindagger/magicpipes.svg?style=svg)](https://circleci.com/gh/twindagger/magicpipes)  [![Coverage Status](https://coveralls.io/repos/github/twindagger/magicpipes/badge.svg)](https://coveralls.io/github/twindagger/magicpipes)
+
 Provides a decorator pattern implementation and several useful filters.
 
 ## Usage
