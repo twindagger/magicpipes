@@ -251,3 +251,4 @@ wallaby.json
 # Mac
 .DS_Store
 docs
+junit.xml
