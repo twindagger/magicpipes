@@ -17,8 +17,8 @@ jobs:
           path: ~/magicpipes
       - store_artifacts:
           path: junit.xml
-  deploy:
-    publish:
+  publish:
+    docker:
       - image: node:8
     steps:
       - checkout
