@@ -1,6 +1,6 @@
 {
   "name": "magicpipes",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Decorator pattern and middleware for javascript",
   "main": "index.js",
   "scripts": {
