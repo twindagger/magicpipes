@@ -6,7 +6,7 @@
   "scripts": {
     "ci": "npm-run-all lint test:ci",
     "test": "jest",
-    "test:ci": "npm run test -- --colors --ci --verbose --testResultsProcessor='jest-junit'",
+    "test:ci": "npm run test -- --colors --ci --verbose --testResultsProcessor='jest-junit' && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
     "lint": "esw ."
   },
   "repository": {
