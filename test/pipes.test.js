@@ -1,4 +1,4 @@
-const pipes = require('../')
+const pipes = require('..')
 const { getPromiseImplementation } = require('../lib/util')
 const es6promise = require('es6-promise-promise')
 

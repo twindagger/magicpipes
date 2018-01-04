@@ -1,4 +1,4 @@
-const pipes = require('../')
+const pipes = require('..')
 const delay = (timeout) => new Promise((res) => setTimeout(res, timeout))
 
 describe('concurrency', () => {

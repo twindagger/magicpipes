@@ -1,4 +1,4 @@
-const pipes = require('../')
+const pipes = require('..')
 const lolex = require('lolex')
 
 const clock = lolex.install()

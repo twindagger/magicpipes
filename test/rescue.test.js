@@ -1,4 +1,4 @@
-const pipes = require('../')
+const pipes = require('..')
 
 describe('rescue', () => {
   let testFilter, context, pipe, rescueFilter, rescuePipe

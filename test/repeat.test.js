@@ -1,4 +1,4 @@
-const pipes = require('../')
+const pipes = require('..')
 
 function Deferred () {
   this.promise = new Promise((resolve, reject) => {
