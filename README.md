@@ -29,10 +29,7 @@ The main export of the pipeline api is the pipeline factory function. It takes a
 
 ### Use your own promise implementation
 
-By default magicpipes uses the global `Promise`. You can use `pipes.usePromiseImplementation` to use any compliant Promise implementation. For now, there can only be one implementation set at a time. Example:
-```javascript
-pipes.usePromiseImplementation(require('bluebird'));
-```
+magicpipes uses the global `Promise`. To use a different Promise implementation, set the global Promise variable before requiring `magicpipes`
 
 ## Included Filters
 
