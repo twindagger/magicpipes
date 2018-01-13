@@ -1,20 +1,17 @@
 const filters = require('./lib')
-const { usePromiseImplementation, getPromiseImplementation } = require('./lib/util')
 
 const pipeFactory = (...pipeFilters) => {
-  let pimpl = getPromiseImplementation()
-
   const pwrap = (fn, ...args) => {
     let res
     try {
       res = fn(...args)
     } catch (ex) {
-      return pimpl.reject(ex)
+      return Promise.reject(ex)
     }
     if (res && typeof (res.then) === 'function') {
       return res
     }
-    return pimpl.resolve(res)
+    return Promise.resolve(res)
   }
 
   return {
@@ -22,7 +19,7 @@ const pipeFactory = (...pipeFilters) => {
       const step = (idx) => (ctx) =>
         idx < pipeFilters.length
           ? pwrap(pipeFilters[idx], ctx, step(idx + 1))
-          : pimpl.resolve(ctx)
+          : Promise.resolve(ctx)
 
       return step(0)(context)
     },
@@ -33,8 +30,6 @@ const pipeFactory = (...pipeFilters) => {
     }
   }
 }
-
-pipeFactory.usePromiseImplementation = usePromiseImplementation
 
 Object.assign(pipeFactory, filters)
 

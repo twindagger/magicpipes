@@ -26,7 +26,6 @@
   "homepage": "https://github.com/twindagger/magicubs-masstransit#readme",
   "devDependencies": {
     "coveralls": "^3.0.0",
-    "es6-promise-promise": "^1.0.0",
     "eslint": "^4.14.0",
     "eslint-plugin-jest": "^21.5.0",
     "eslint-plugin-unicorn": "^3.0.1",
@@ -45,7 +44,8 @@
         "lines": 95,
         "statements": -10
       }
-    }
+    },
+    "testEnvironment": "node"
   },
   "jest-junit": {
     "suiteName": "magicpipes jest",
