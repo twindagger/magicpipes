@@ -1,6 +1,12 @@
 const filters = require('./lib')
 
+const flatten = (arr) =>
+  arr.reduce((flat, toFlatten) => flat.concat(Array.isArray(toFlatten) ? flatten(toFlatten) : toFlatten), [])
+
 const pwrap = (fn, ...args) => {
+  if (typeof fn !== 'function') {
+    return Promise.reject(new TypeError('Expected filter to be a function'))
+  }
   let res
   try {
     res = fn(...args)
@@ -14,7 +20,7 @@ const pwrap = (fn, ...args) => {
 }
 
 const pipeFactory = (...pipeFilters) => {
-  const filters = [].concat(pipeFilters)
+  const filters = flatten(pipeFilters)
 
   return {
     send (context) {
@@ -25,11 +31,11 @@ const pipeFactory = (...pipeFilters) => {
 
       return step(0)(context)
     },
-    prepend (filtersToPrepend) {
-      return pipeFactory(filtersToPrepend.concat(pipeFilters))
+    prepend (...filtersToPrepend) {
+      return pipeFactory(filtersToPrepend.concat(filters))
     },
-    append (filtersToAppend) {
-      return pipeFactory(pipeFilters.concat(filtersToAppend))
+    append (...filtersToAppend) {
+      return pipeFactory(filters.concat(filtersToAppend))
     },
     inspect () {
       return {
