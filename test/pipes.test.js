@@ -23,9 +23,9 @@ describe('pipes', () => {
     await pipe.send({ a: 0 })
   })
   it('can handle asynchronous errors', async () => {
-    let pipe = pipes(() => {
-      return Promise.reject('Some Error')
-    })
+    let pipe = pipes(() =>
+      Promise.reject('Some Error')
+    )
     await expect(pipe.send({ a: 0 })).rejects.toThrow()
   })
 })
